@@ -8,6 +8,7 @@ from random import randint
 class EchoClientProtocol(asyncio.Protocol):
     def __init__(self):
         self.transport = None
+        self.status = 0
 
     def connection_made(self, transport):
         print('Connection is made')
@@ -15,15 +16,18 @@ class EchoClientProtocol(asyncio.Protocol):
         self.transport = transport
         self._deserializer = PacketType.Deserializer()
         self.sendRequestWordLength()
+        self.status += 1
 
     def data_received(self, data):
         self._deserializer.update(data)
         for pkt in self._deserializer.nextPackets():
             self.processPacket(pkt)
+        self.status += 1
 
     def connection_lost(self, exc):
         print('Connection is closed by the server')
         self.transport = None
+        self.status += 1
 
     def processPacket(self, pkt):
         if isinstance(pkt, WordLength):

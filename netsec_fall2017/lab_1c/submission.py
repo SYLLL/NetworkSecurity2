@@ -12,11 +12,21 @@ from playground.network.packet.fieldtypes import UINT32, STRING
 def basicUnitTest():
     s = EchoServerProtocol()
     c = EchoClientProtocol()
-    transportToServer = MockTransportToProtocol(s)
-    transportToClient = MockTransportToProtocol(c)
-    s.connection_made(transportToClient)
-    c.connection_made(transportToServer)
-    
+    cTransport, sTransport = MockTransportToProtocol.CreateTransportPair(c, s)
+    # Both client protocol and server protocols' states are 0 at this time
+    assert s.status == 0
+    assert c.status == 0
+    s.connection_made(sTransport)
+    c.connection_made(cTransport)
+    # Both client protocol and server protocols' states change to 3 at this time
+    assert s.status == 3
+    assert c.status == 3
+    s.connection_lost(None)
+    c.connection_lost(None)
+    # Both client protocol and server protocols' states are 4 when they 
+    # are both closed at this time
+    assert s.status == 4
+    assert s.status == 4
     print ('Unit tests passed.')
 
 if __name__ == "__main__":

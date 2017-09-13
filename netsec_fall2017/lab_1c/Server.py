@@ -8,6 +8,7 @@ from random import randint
 class EchoServerProtocol(asyncio.Protocol):
     def __init__(self):
         self.transport = None
+        self.status = 0
 
     def connection_made(self, transport):
         self.transport = transport
@@ -15,15 +16,18 @@ class EchoServerProtocol(asyncio.Protocol):
         peername = transport.get_extra_info('peername')
         print('Connection is made from {}'.format(peername))
         print('')
+        self.status += 1
 
     def data_received(self, data):
         self._deserializer.update(data)
         for pkt in self._deserializer.nextPackets():
             self.processPacket(pkt)
+        self.status += 1
 
     def connection_lost(self, exc):
         print('Connection is closed')
         self.transport = None
+        self.status += 1
 
     def processPacket(self, pkt):
         if isinstance(pkt, RequestWordLength):
@@ -43,7 +47,19 @@ class EchoServerProtocol(asyncio.Protocol):
     def sendWordLength(self, pkt):
         wdLength = WordLength()
         wdLength.iD = 1024
-        wdLength.wordLength = 4
+        # Randomly choose a correct word for client
+        if randint(0,3) == 0:
+            wdLength.wordLength = 4
+            self.correctword = "East"
+        elif randint(0,3) == 1:
+            wdLength.wordLength = 4
+            self.correctword = "West"
+        elif randint(0,3) == 1:
+            wdLength.wordLength = 5
+            self.correctword = "North"
+        else:
+            wdLength.wordLength = 5
+            self.correctword = "South"
         self.transport.write(wdLength.__serialize__())
         print('Sent WordLength packet to client:')
         print('wordLength:', wdLength.wordLength)
@@ -54,8 +70,8 @@ class EchoServerProtocol(asyncio.Protocol):
         guessResult = GuessResult()
         guessResult.iD = pkt.iD
         guessedWord = pkt.word
-        # Make a random guess
-        if guessedWord == "East":
+        # Check if the client's guess is correct
+        if guessedWord == self.correctword:
             guessResult.result = "correct"
         else:
             guessResult.result = "incorrect"

@@ -1,7 +1,7 @@
 # NetworkSecurity2
 601.444 Network Security Fall 2017
 
-I created this new repository because there was something wrong with my virtual box, so I wrote my code directly on my Mac. Link to my original submission for lab1b on 9/6: https://github.com/SYLLL/NetworkSecurity/blob/master/submission/netsec_fall2017/lab_1b/submission.py
+I created this new repository because there was something wrong with my virtual box (It does not allow me to open two shells at the same time, which made me hard to test my code for both Server.py and Client.py), so I wrote my code directly on my Mac. Link to my original submission for lab1b on 9/6: https://github.com/SYLLL/NetworkSecurity/blob/master/submission/netsec_fall2017/lab_1b/submission.py
 
 ==================================================================================
 
@@ -14,12 +14,24 @@ Comments on Lab1b:
 
 2. I required all iDs of packets to be UINT, and the result to be STRING ("correct" or "incorrect") instead of BOOL.
 
+==================================================================================
+
 Comments on Lab1c:
 
-1. I've tested my Client and Server programs using event loop. To run:
+1. When connection_made is called, Client immediately sends a request to server.
+Then Server randomly chooses a word among "South", "North", "East", "West" (save 
+the word choice to itself secretly) and sends back the wordLength packet with 
+corresponding word length of the word. Then Client makes a random guess based on the given word length. In the end, Server responds to Client with the packet containing if Client was correct. (More details in comments)
+
+2. I've tested my Client and Server programs using event loop. To run:
     Uncomment bottem lines from Server.py and enter command: python3 Server.py
     Uncomment bottem lines from Client.py and enter command: python3 Client.py
     
-2. I've run unit tests on Client.py and Server.py:
+3. I've run unit tests on Client.py and Server.py:
     Enter command: python3 submission.py
+
+4. I've tested the states for each Client's protocol instance and Server's 
+protocol instance. For example, when connection is made, both the states 
+change to 1, and in the end, both the states change to 4 since each of them
+call data_received twice and connection_lost once.
 
