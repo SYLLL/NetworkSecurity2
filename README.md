@@ -35,3 +35,9 @@ protocol instance. For example, when connection is made, both the states
 change to 1, and in the end, both the states change to 4 since each of them
 call data_received twice and connection_lost once.
 
+==================================================================================
+
+Comments on Lab1d:
+
+1. For some reason, Server does not get Client's first packet even if connection is established, so I have
+to make Client sleep for 5 seconds before sending a new packet, which is added in the bottom lines of Client.py
