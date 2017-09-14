@@ -41,3 +41,7 @@ Comments on Lab1d:
 
 1. For some reason, Server does not get Client's first packet even if connection is established, so I have
 to make Client sleep for 5 seconds before sending a new packet, which is added in the bottom lines of Client.py
+
+2. To run:
+    python3 Server.py
+    python3 Client.py
