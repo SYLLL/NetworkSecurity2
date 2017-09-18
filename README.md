@@ -64,3 +64,7 @@ with my programs.
 
 4. To kill:
     press control+c
+
+5. Lab2 team: Vivian Ding, Mengdi Yang, Steven Cheng, Jibraan Sihgh Chahal, Suyi Liu
+
+6. I have reviewed information about TCP.
