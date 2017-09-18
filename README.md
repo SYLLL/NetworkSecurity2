@@ -5,7 +5,7 @@ I created this new repository because there was something wrong with my virtual 
 
 ==================================================================================
 
-Comments on Lab1b:
+Comments on Lab1b (The code for Lab1b in this repository is the exact copy of my original submission on 9/6)
 
 1. Besides basic unit tests (two packets are equal/ not equal), some experiments are done:
     a. Intentionally assigning a STRING to an INT field does not affect the packet to behave as a "correct" packet.
@@ -45,3 +45,22 @@ to make Client sleep for 5 seconds before sending a new packet, which is added i
 2. To run:
     python3 Server.py
     python3 Client.py
+
+3. To kill:
+    press control+c
+
+==================================================================================
+
+Comments on Lab1e:
+
+1. Since the first packet not received bug is fixed, I removed the resend part when EchoClientProtocol is initialized.
+
+2. Although FirstPassingThroughProtocol is chained before SecondPassingThroughProtocol, SecondPassingThroughProtocol is in a lower layer, which is first passed through when I test
+with my programs.
+
+3. To run:
+    python3 Server.py
+    python3 Client.py
+
+4. To kill:
+    press control+c
