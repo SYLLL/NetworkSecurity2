@@ -1,6 +1,7 @@
 # Client side
 import asyncio
 import playground
+import logging
 from random import randint
 from Packets import RequestWordLength, WordLength, GuessWord, GuessResult
 from PassingThroughProtocols import FirstPassingThroughProtocol, SecondPassingThroughProtocol
@@ -82,6 +83,7 @@ class EchoClientProtocol(asyncio.Protocol):
         print('')
 
 loop = asyncio.get_event_loop()
+loop.set_debug(enabled=True)
 # Chains two layers together
 f = StackingProtocolFactory(lambda: FirstPassingThroughProtocol(), lambda: SecondPassingThroughProtocol())
 ptConnector = playground.Connector(protocolStack=f)

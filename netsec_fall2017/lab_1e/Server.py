@@ -87,6 +87,7 @@ class EchoServerProtocol(asyncio.Protocol):
         print('')
 
 loop = asyncio.get_event_loop()
+loop.set_debug(enabled=True)
 # Chains two layers together
 f = StackingProtocolFactory(lambda: FirstPassingThroughProtocol(), lambda: SecondPassingThroughProtocol())
 ptConnector = playground.Connector(protocolStack=f)
