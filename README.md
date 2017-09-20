@@ -1,7 +1,7 @@
 # NetworkSecurity2
 601.444 Network Security Fall 2017
 
-I created this new repository because there was something wrong with my virtual box (It does not allow me to open two shells at the same time, which made me hard to test my code for both Server.py and Client.py), so I wrote my code directly on my Mac. Link to my original submission for lab1b on 9/6: https://github.com/SYLLL/NetworkSecurity/blob/master/submission/netsec_fall2017/lab_1b/submission.py
+I created this new repository because there was something wrong with my virtual box (It does not allow me to open two shells at the same time, which made it hard to test my code for both Server.py and Client.py), so I wrote my code directly on my Mac. Link to my original submission for lab1b on 9/6: https://github.com/SYLLL/NetworkSecurity/blob/master/submission/netsec_fall2017/lab_1b/submission.py
 
 ==================================================================================
 
